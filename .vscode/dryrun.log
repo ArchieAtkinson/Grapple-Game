@@ -1,0 +1,7 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/dev/game_dev/Raylib/Grapple'
+ 
+gcc -o grapple  -Wall -Werror -std=c99 -D_DEFAULT_SOURCE -Wno-missing-braces  -Wl,-rpath,/home/dev/game_dev/Raylib/src -g -O0 -I/include -I/usr/local/include -isystem. -isystem/home/dev/game_dev/Raylib/src -isystem/home/dev/game_dev/Raylib/release/include -isystem/home/dev/game_dev/Raylib/src/external -L. -L/usr/local/lib -L/home/dev/game_dev/Raylib/src -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -lc -DPLATFORM_DESKTOP
+ 
+make: Leaving directory '/home/dev/game_dev/Raylib/Grapple'
+ 

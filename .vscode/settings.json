@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "sdl.h": "c",
+        "sdl_stdinc.h": "c",
+        "sdl_main.h": "c",
+        "stdio.h": "c",
+        "sdl_timer.h": "c",
+        "player.h": "c",
+        "math.h": "c",
+        "common.h": "c",
+        "camera.h": "c",
+        "background.h": "c",
+        "overlay.h": "c"
+    }
+}
