@@ -6,23 +6,24 @@
 #define PLAYER_SIZE 50.0f
 
 typedef struct{
-    float circle_r;
+    PhysicsBody hook;
     Vector2 speed;
     Vector2 objective;
-    Vector2 position;
     bool active;
     bool hooked;
 } grapple_t;
 
+
 typedef struct{
     grapple_t grapple;
-    Rectangle rec;
+    PhysicsBody body;
     Vector2 speed;
-    Vector2 position;
 } player_t;
 
-void player_update(player_t *player, Rectangle left_bank, Rectangle right_bank);
-void player_draw(player_t *player);
-void player_init(player_t *player);
+extern player_t player;
+
+void player_update();
+void player_draw();
+void player_init();
 
 #endif

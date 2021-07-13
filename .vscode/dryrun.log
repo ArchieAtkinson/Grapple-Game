@@ -1,7 +1,19 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory '/home/dev/game_dev/Raylib/Grapple'
  
-gcc -o grapple  -Wall -Werror -std=c99 -D_DEFAULT_SOURCE -Wno-missing-braces  -Wl,-rpath,/home/dev/game_dev/Raylib/src -g -O0 -I/include -I/usr/local/include -isystem. -isystem/home/dev/game_dev/Raylib/src -isystem/home/dev/game_dev/Raylib/release/include -isystem/home/dev/game_dev/Raylib/src/external -L. -L/usr/local/lib -L/home/dev/game_dev/Raylib/src -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -lc -DPLATFORM_DESKTOP
+echo "Creating directories"
+mkdir -p build/debug/ build/debug/ build/debug/ build/debug/ build/debug/
+mkdir -p bin/debug
+echo "Beginning debug build"
+date '+%s' > ./.debug_time
+make all --no-print-directory
  
+echo "Making symlink: game -> bin/debug/game"
+rm -f game
+ln -s bin/debug/game game
+ 
+echo -n "Total build time: "
+read st < ./.debug_time ; rm -f ./.debug_time ; st=$((`date '+%s'` - $st - 86400)) ; echo `date -u -d @$st '+%H:%M:%S'`
+./game
 make: Leaving directory '/home/dev/game_dev/Raylib/Grapple'
  

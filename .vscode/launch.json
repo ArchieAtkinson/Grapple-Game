@@ -8,7 +8,7 @@
             "name": "gcc build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/game",
+            "program": "${workspaceFolder}/bin/debug/game",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",

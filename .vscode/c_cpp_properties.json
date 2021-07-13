@@ -6,12 +6,14 @@
                 "${workspaceFolder}/**",
                 "/usr/include/**",
                 "/usr/include/SDL2/",
+                "/home/dev/raylib/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "gnu17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "linux-gcc-x64"
+            "intelliSenseMode": "linux-gcc-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4
