@@ -17,6 +17,8 @@
 
 #define COIN_START_POS 200
 
+Sound coin_sound;
+
 typedef struct{
     Vector2 position[MAX_COIN_IN_SET];
     int amount;
@@ -59,6 +61,8 @@ static void create_inital_coin_sets(){
 
 
 void objects_init(){
+    coin_sound = LoadSound("resources/coin.wav");
+
     create_inital_coin_sets();
 
     top_bar = CreatePhysicsBodyRectangle((Vector2){SCREEN_WIDTH/2, BAR_HEIGHT/2}, SCREEN_WIDTH*2, BAR_HEIGHT, 10);
@@ -104,6 +108,7 @@ static void collect_coins(){
                     coin_sets[i].collected[j] = CheckCollisionRecs(body_to_rec(player.body), centre_to_rec(coin_sets[i].position[j], COIN_WIDTH, COIN_HEIGHT));
                     if (coin_sets[i].collected[j]){
                         score++;
+                        PlaySound(coin_sound);
                     }                  
                 }
             }
