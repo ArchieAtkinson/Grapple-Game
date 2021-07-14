@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <sys/time.h>
+
 #include "raylib.h"
 
 #include "physac.h"
@@ -13,6 +15,8 @@
 extern Camera2D camera;
 extern int score; 
 
+extern struct timeval current_time[2];
+extern int loop_time;
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
