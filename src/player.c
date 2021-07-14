@@ -14,12 +14,10 @@
 
 #define VELOCITY 1.0f
 
-#define ROPE_MIN 50
-#define ROPE_MAX 400
-
 #define ROPE_CHANGE 20
 
-int rope_length;
+rope_len_t selected_rope = MID_ROPE;
+rope_len_t current_rope = MID_ROPE;
 
 float Vector2DCross(Vector2 v1, Vector2 v2){
     Vector3 va  = (Vector3){v1.x, v1.y, 0.0f};
@@ -77,6 +75,7 @@ static bool is_hook_stuck(){
                 grapple.hook->enabled = false;
                 player.grapple.hooked = true;
                 Vector2Distance(player.body->position,player.grapple.hook->position);
+                current_rope = selected_rope;
                 return true;
             }
         }
@@ -115,17 +114,17 @@ void player_draw(){
 
 
 void player_update(){
+    
     grapple_t *grapple = &(player.grapple);
 
-    if (IsKeyDown(KEY_C)){
-        if (rope_length < ROPE_MAX){
-            rope_length += ROPE_CHANGE;
-        }
+    if (IsKeyPressed(KEY_A)){
+        selected_rope = SHORT_ROPE;
     }
-    else if (IsKeyDown(KEY_D)) {
-        if (rope_length > ROPE_MIN){
-            rope_length -= ROPE_CHANGE;
-        }
+    else if (IsKeyPressed(KEY_S)) {
+        selected_rope = MID_ROPE;
+    }
+    else if (IsKeyPressed(KEY_D)) {
+        selected_rope = LONG_ROPE;
     }
 
     if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON)){
@@ -159,7 +158,7 @@ void player_update(){
 
     
     if (grapple->hooked){
-        spring_const_dist(player.grapple.hook, player.body, 300);
+        spring_const_dist(player.grapple.hook, player.body, current_rope);
     }
 
     if (grapple->active == false && grapple->hooked == false){

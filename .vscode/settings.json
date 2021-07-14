@@ -43,6 +43,7 @@
         "tuple": "c",
         "typeinfo": "c",
         "iterator": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "raylib.h": "c"
     }
 }

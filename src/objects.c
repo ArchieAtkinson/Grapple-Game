@@ -75,7 +75,6 @@ void draw_coin_sets(){
             if (set.collected[j] == false){
                 DrawRectangleRounded(centre_to_rec(set.position[j], COIN_WIDTH, COIN_HEIGHT), 1.0f, 10, GOLD);
             }
-
         }
     }
 }
@@ -103,7 +102,9 @@ static void collect_coins(){
             for(int j = 0; j < coin_sets[i].amount; j++){
                 if (coin_sets[i].collected[j] != true){
                     coin_sets[i].collected[j] = CheckCollisionRecs(body_to_rec(player.body), centre_to_rec(coin_sets[i].position[j], COIN_WIDTH, COIN_HEIGHT));
-                    score += coin_sets[i].collected[j];
+                    if (coin_sets[i].collected[j]){
+                        score++;
+                    }                  
                 }
             }
         }
