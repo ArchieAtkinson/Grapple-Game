@@ -24,7 +24,7 @@ player_t player;
 Camera2D camera = { 0 };
 int score;
 int loop_time;
-
+Sound music;
 
 void update(){
     UpdatePhysics();    
@@ -32,6 +32,11 @@ void update(){
     background_update(&player);  
     player_update(&player);
     objects_update(&player);
+
+    if (!IsSoundPlaying(music)){
+        PlaySound(music); 
+    }  
+
 }
 
 
@@ -90,6 +95,11 @@ int main(void)
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Grapple Game");
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+
+    InitAudioDevice();
+    music = LoadSound("resources/music.wav");  
+    PlaySound(music); 
+    SetSoundVolume(music, 0.2f);
 
     init();
 
