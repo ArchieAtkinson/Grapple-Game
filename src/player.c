@@ -7,7 +7,7 @@
 #define HOOK_SIZE 5
 #define ROPE_SIZE 2
 
-#define SPRING_CONST_k 2.0f
+#define SPRING_CONST_k 0.9f
 #define DAMP_CONST_b 500.0f
 
 #define POINT_VERT 0
@@ -39,14 +39,15 @@ void spring(Vector2 mouse_postion){
 void spring_const_dist(PhysicsBody anchor, PhysicsBody loose, float des_dis){
     //http://www.euclideanspace.com/physics/kinematics/combinedVelocity/
     //https://gafferongames.com/post/spring_physics/
-
+    //F = -k(|x|-d)(x/|x|) - bv
+    
     Vector2 speration = Vector2Subtract(anchor->position, loose->position);
     float current_dis = Vector2Length(speration);
-    float diff_dis = current_dis - des_dis;
+    float diff_dis = current_dis - (des_dis - 320.0f/SPRING_CONST_k);
     Vector2 unit_len =  Vector2Scale(speration, 1/current_dis);
     Vector2 x = Vector2Scale(unit_len, diff_dis);
-    Vector2 v = loose->velocity;
     Vector2 kx = Vector2Scale(x, SPRING_CONST_k);
+    Vector2 v = loose->velocity;
     Vector2 bv = Vector2Scale(v, -DAMP_CONST_b);
     Vector2 f = Vector2Add(kx, bv);
 
@@ -74,7 +75,6 @@ static bool is_hook_stuck(){
             if (CheckCollisionRecs(rec_surface, rec_hook)){
                 grapple.hook->enabled = false;
                 player.grapple.hooked = true;
-                Vector2Distance(player.body->position,player.grapple.hook->position);
                 current_rope = selected_rope;
                 return true;
             }
@@ -84,7 +84,7 @@ static bool is_hook_stuck(){
 }
 
 void player_init(){
-    player.body = CreatePhysicsBodyRectangle((Vector2){START_POS_X, START_POS_Y}, PLAYER_SIZE,PLAYER_SIZE, 10);
+    player.body = CreatePhysicsBodyRectangle((Vector2){START_POS_X, START_POS_Y}, PLAYER_SIZE,PLAYER_SIZE, 20);
     player.body->enabled = true;
     
     player.grapple.hook = CreatePhysicsBodyRectangle((Vector2){START_POS_X + PLAYER_SIZE, START_POS_Y}, HOOK_SIZE, HOOK_SIZE, 10);
@@ -114,8 +114,10 @@ void player_draw(){
 
 
 void player_update(){
-    
     grapple_t *grapple = &(player.grapple);
+    static float orignal_hook_dis = 0;
+
+    printf("%.2f %.2f\n", Vector2Distance(player.body->position,player.grapple.hook->position), orignal_hook_dis);
 
     if (IsKeyPressed(KEY_A)){
         selected_rope = SHORT_ROPE;
@@ -125,6 +127,11 @@ void player_update(){
     }
     else if (IsKeyPressed(KEY_D)) {
         selected_rope = LONG_ROPE;
+    }
+
+    else if (IsKeyPressed(KEY_G) && grapple->hooked == false) {
+        Vector2 force = (Vector2){0, -10000.0f};
+        PhysicsAddForce(player.body, force);
     }
 
     if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON)){
@@ -151,14 +158,13 @@ void player_update(){
         grapple->hook->position.x = player.body->position.x;
         grapple->hook->position.y = player.body->position.y - PLAYER_SIZE;
     }
-
     else if(grapple->active == true && grapple->hooked == false){
         is_hook_stuck(player);
+        orignal_hook_dis = Vector2Distance(player.grapple.hook->position, player.body->position);
     }
-
     
     if (grapple->hooked){
-        spring_const_dist(player.grapple.hook, player.body, current_rope);
+        spring_const_dist(player.grapple.hook, player.body, (float)current_rope);
     }
 
     if (grapple->active == false && grapple->hooked == false){

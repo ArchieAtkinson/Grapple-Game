@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-#define PLAYER_SIZE 50.0f
+#define PLAYER_SIZE 40.0f
 
 typedef enum{
     SHORT_ROPE = 25,

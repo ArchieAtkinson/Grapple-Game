@@ -17,8 +17,8 @@ extern int score;
 
 extern struct timeval current_time[2];
 extern int loop_time;
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
+#define SCREEN_WIDTH 1920   
+#define SCREEN_HEIGHT 1080
 
 #define GRAVITY 1.0f
 
