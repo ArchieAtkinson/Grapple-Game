@@ -104,11 +104,11 @@ Vector2 get_fixed_mouse(){
 void player_draw(){
 
     // DrawRectangleRec(body_to_rec(player.body), PINK);
-    DrawRectanglePro(body_to_rec(player.body), (Vector2){0,0},player.body->orient, PINK);
+    DrawRectanglePro(body_to_rec(player.body), (Vector2){0,0},player.body->orient*RAD2DEG, PINK);
 
  
     DrawLineV(player.body->position,player.grapple.hook->position, LIME);
-    DrawRectanglePro(body_to_rec(player.grapple.hook), (Vector2){0,0} ,player.grapple.hook->orient, RED);
+    DrawRectanglePro(body_to_rec(player.grapple.hook), (Vector2){0,0} ,player.grapple.hook->orient*RAD2DEG, RED);
 
 }
 
