@@ -6,14 +6,16 @@
 #define PLATFORM_WIDTH 100
 #define PLATFORM_HIGHT 30
 
-#define COIN_GAP 50
+#define COIN_WIDTH 40
+#define COIN_HEIGHT 80
+
+#define COIN_GAP COIN_WIDTH * 2.5
 #define MAX_COIN_IN_SET 10
 #define MAX_ACTIVE_COIN_SETS 10
-#define VERT_COIN_GAP 100
-#define COIN_SET_GAP_MAX 500
+#define VERT_COIN_GAP 300
 
-#define COIN_WIDTH 20
-#define COIN_HEIGHT 40
+#define COIN_SET_GAP_MIN COIN_WIDTH * 5
+#define COIN_SET_GAP_MAX COIN_WIDTH * 10
 
 #define COIN_START_POS 200
 
@@ -36,7 +38,7 @@ static int populate_coin_set(coin_set_t *coin_set, int last_coin_pos){
 
     int coin_height = ran_int_range(VERT_COIN_GAP, SCREEN_HEIGHT - VERT_COIN_GAP);
 
-    int set_gap = ran_int_range(COIN_GAP, COIN_SET_GAP_MAX);
+    int set_gap = ran_int_range(COIN_SET_GAP_MIN, COIN_SET_GAP_MAX);
 
     int coin_offset_x = last_coin_pos + set_gap;
 

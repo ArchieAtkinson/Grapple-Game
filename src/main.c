@@ -57,8 +57,6 @@ void draw(){
 
     DrawText(TextFormat("Score: %d ", score), SCREEN_WIDTH - 250, 2 , 30, DARKBLUE);
 
-    DrawText(TextFormat("Current Rope:%d Selected Rope %d", current_rope, selected_rope), SCREEN_WIDTH/3.0f, 2 , 20, DARKBLUE);
-
     DrawText(TextFormat("FPS: %d ",GetFPS()), 5, 0, 10, GOLD);
     DrawText(TextFormat("player: x:%f y:%f", player.body->position.x, player.body->position.y), 5, 10, 10, GOLD);
     DrawText(TextFormat("Mouse_Screen: x:%f y:%f", GetMousePosition().x, GetMousePosition().y), 5, 20, 10, GOLD);
