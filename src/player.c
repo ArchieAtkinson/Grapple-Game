@@ -48,7 +48,6 @@ void spring_const_dist(PhysicsBody anchor, PhysicsBody loose, float des_dis){
 }
 
 static void is_hook_stuck(){
-    static int counts = 0;
     Rectangle rec_top_bar = body_to_rec(top_bar);
     Rectangle rec_hook = body_to_rec(player.grapple.hook);
 
