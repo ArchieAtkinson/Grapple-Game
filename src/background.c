@@ -1,11 +1,12 @@
 #include "common.h"
 #include "background.h"
+#include "root_dir.h"
 
 Texture2D background;
 int pos[2];
 
 void background_init(){
-    background = LoadTexture("resources/space_bg_large.png");
+    background = LoadTexture(TextFormat("%s/%s",ROOT_DIR, "resources/space_bg_large.png"));
     pos[0] = 0;
     pos[1] = background.width;
 }

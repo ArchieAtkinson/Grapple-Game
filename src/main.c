@@ -1,13 +1,4 @@
-/*******************************************************************************************
-*
-*   raylib [textures] example - Background scrolling
-*
-*   This example has been created using raylib 2.0 (www.raylib.com)
-*   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
-*
-*   Copyright (c) 2019 Ramon Santamaria (@raysan5)
-*
-********************************************************************************************/
+#include "root_dir.h"
 #include "common.h"
 #include "player.h"
 #include "background.h"
@@ -15,8 +6,6 @@
 #define PHYSAC_IMPLEMENTATION
 #define PHYSAC_DEBUG
 #include "physac.h"
-
-
 
 
 struct timeval current_time[2];
@@ -56,7 +45,7 @@ void draw(){
     DrawCircleV(GetMousePosition(), 3, RED);
 
     DrawText(TextFormat("Score: %d ", score), SCREEN_WIDTH - 250, 2 , 30, DARKBLUE);
-
+#ifdef DEBUG
     DrawText(TextFormat("FPS: %d ",GetFPS()), 5, 0, 10, GOLD);
     DrawText(TextFormat("player: x:%f y:%f", player.body->position.x, player.body->position.y), 5, 10, 10, GOLD);
     DrawText(TextFormat("Mouse_Screen: x:%f y:%f", GetMousePosition().x, GetMousePosition().y), 5, 20, 10, GOLD);
@@ -66,7 +55,7 @@ void draw(){
     DrawText(TextFormat("Camera Offset: x:%f y:%f", camera.offset.x, camera.offset.y), 5, 60, 10, GOLD);
     DrawText(TextFormat("Camera Combined: x:%f y:%f", camera.target.x + camera.offset.x, camera.target.y + camera.offset.y), 5, 70, 10, GOLD);
     DrawText(TextFormat("Loop Time: %dus", loop_time), 5, 80, 10, GOLD);
-
+#endif
     EndDrawing();
 }
 
@@ -92,38 +81,29 @@ void init(){
 int main(void)
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Grapple Game");
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    SetTargetFPS(60);
 
     InitAudioDevice();
-    music = LoadSound("resources/music.wav");  
+    
+    music = LoadSound(TextFormat("%s/%s",ROOT_DIR, "resources/music.wav"));  
     PlaySound(music); 
     SetSoundVolume(music, 0.2f);
 
     init();
 
-    //--------------------------------------------------------------------------------------
-
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    while (!WindowShouldClose()) 
     {
 
         if (IsKeyPressed(KEY_R)){
             init();
         }
-        // gettimeofday(&current_time[0], NULL);
         update();
-
-
         draw();
-        // gettimeofday(&current_time[1], NULL);
-        // loop_time = current_time[1].tv_usec  - current_time[0].tv_usec;
     }
 
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
     ClosePhysics();
-    CloseWindow();              // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
+    CloseWindow();              
+
 
     return 0;
 }
