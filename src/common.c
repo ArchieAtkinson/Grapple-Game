@@ -2,7 +2,6 @@
 #include "raymath.h"
 
 
-
 Rectangle body_to_rec(PhysicsBody body){
     Rectangle rec = {
     .x = GetPhysicsShapeVertex(body, 3).x,

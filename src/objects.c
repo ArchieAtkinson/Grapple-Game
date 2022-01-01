@@ -1,3 +1,4 @@
+#include "root_dir.h"
 #include "common.h"
 #include "objects.h"
 
@@ -63,7 +64,7 @@ static void create_inital_coin_sets(){
 
 
 void objects_init(){
-    coin_sound = LoadSound("resources/coin.wav");
+    coin_sound = LoadSound(TextFormat("%s/%s",ROOT_DIR, "resources/coin.wav"));
 
     create_inital_coin_sets();
 
@@ -89,7 +90,6 @@ void objects_draw(){
     DrawRectangleRec(body_to_rec(top_bar), GRAY);
     DrawRectangleRec(body_to_rec(start_platform), GRAY);
     draw_coin_sets();
-    // printf("%d\n", coin_sets_free_index);
 }
 
 static void manage_coin_sets(){

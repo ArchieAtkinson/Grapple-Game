@@ -44,6 +44,7 @@
         "typeinfo": "c",
         "iterator": "c",
         "stdlib.h": "c",
-        "raylib.h": "c"
+        "raylib.h": "c",
+        "raymath.h": "c"
     }
 }
