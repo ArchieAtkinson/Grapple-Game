@@ -19,4 +19,3 @@ Raylib source code is downloaded using CMake FetchContent.
 - Now to build the project 
     - `cmake --build build`    
 - Now run the `Grapple.exe` from the build folder
-
