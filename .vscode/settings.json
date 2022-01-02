@@ -45,6 +45,7 @@
         "iterator": "c",
         "stdlib.h": "c",
         "raylib.h": "c",
-        "raymath.h": "c"
+        "raymath.h": "c",
+        "root_dir.h": "c"
     }
 }

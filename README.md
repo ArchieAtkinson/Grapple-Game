@@ -4,8 +4,9 @@ A simple endless runner game made with [raylib](https://www.raylib.com/).
 Music by Andrew Atkinson
 
 ## Download
-To clone both this repo and its submodules:  
-`git clone --recurse-submodules -j8 https://github.com/ArchieAtkinson/Grapple-Game.git`
+To clone both this repo:      
+`git clone https://github.com/ArchieAtkinson/Grapple-Game.git`      
+Raylib source code is downloaded using CMake FetchContent.    
 
 ## Builing and running the Project
 
